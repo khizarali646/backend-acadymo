@@ -6,17 +6,21 @@ import {
   HttpStatus,
   Post,
   UseGuards,
-  Request
+  Request,
+  SetMetadata,
 } from '@nestjs/common';
+
 import { UserService } from './user.service';
 import { JwtAuthGuard } from '../guards/auth.guard';
+import { RoleGuard } from '../guards/roles.gurad';
 
 @Controller('user')
 export class UserController {
   constructor(private user: UserService) {}
 
-  @Get()
-  @UseGuards(JwtAuthGuard)
+  @Get('/roles')
+  @UseGuards(JwtAuthGuard, RoleGuard)
+  @SetMetadata('roles', ['admin'])
   getUser(@Request() request): object {
     const { user } = request;
     const foundUser = this.user.findUserByEmailAddress({
