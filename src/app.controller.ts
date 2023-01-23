@@ -6,6 +6,6 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return 'Acadymo API v0.1';
+    return 'Api is Running';
   }
 }
