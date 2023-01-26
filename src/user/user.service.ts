@@ -1,9 +1,8 @@
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './user.schema';
 import { Model } from 'mongoose';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserDto } from './user.dto';
-
 import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UserService {
@@ -22,5 +21,22 @@ export class UserService {
       role: role,
     });
     return createdUser._id;
+  }
+  async findAll(): Promise<UserDocument[]> {
+    return this.model.find().exec();
+  }
+
+  async findOne(id: string): Promise<UserDocument> {
+    return this.model.findById(id);
+  }
+  async update(id: string, updateDto: UserDto): Promise<UserDocument> {
+    return this.model.findByIdAndUpdate(id, updateDto);
+  }
+  async remove(id: string): Promise<UserDocument> {
+    const user = await this.findOne(id);
+    if (!user) {
+      throw new NotFoundException();
+    }
+    return this.model.findByIdAndDelete(id);
   }
 }
