@@ -49,7 +49,7 @@ export class UserController {
     return foundUser;
   }
 
-  @Get('/login')
+  @Get('/profile')
   @UseGuards(JwtAuthGuard, RoleGuard)
   @SetMetadata('roles', ['teacher', 'parent', 'student', 'admin'])
   getTeacher(@Request() request): object {
