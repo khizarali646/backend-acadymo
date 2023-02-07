@@ -22,6 +22,15 @@ export class UserService {
     });
     return createdUser._id;
   }
+
+  // async createUserWithPhone({ phoneNumber, password, role }): Promise<string> {
+  //   const createdUser = await this.model.create({
+  //     phoneNumber: phoneNumber,
+  //     password: await bcrypt.hash(password, 10),
+  //     role: role,
+  //   });
+  //   return createdUser._id;
+  // }
   async findAll(): Promise<UserDocument[]> {
     return this.model.find().exec();
   }

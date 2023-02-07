@@ -7,6 +7,10 @@ import { AuthModule } from './auth/auth.module';
 import { OrganizationModule } from './organization/organization.module';
 import { CampusModule } from './campus/campus.module';
 import { AdminModule } from './admin/admin.module';
+import { TeacherModule } from './teacher/teacher.module';
+import { StudentModule } from './student/student.module';
+import { ClassModule } from './class/class.module';
+import { ParentModule } from './parent/parent.module';
 
 @Module({
   imports: [
@@ -25,6 +29,10 @@ import { AdminModule } from './admin/admin.module';
     OrganizationModule,
     CampusModule,
     AdminModule,
+    TeacherModule,
+    StudentModule,
+    ClassModule,
+    ParentModule,
   ],
   controllers: [AppController],
   providers: [],

@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Body, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Campus, CampusDocument } from '../schemas/campus.schema';
 import { Model } from 'mongoose';
@@ -28,6 +28,7 @@ export class CampusService {
 
   async update(
     id: string,
+    @Body()
     updateCampusDto: CampusDto,
   ): Promise<CampusDocument> {
     return this.campusModel.findByIdAndUpdate(id, updateCampusDto);

@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CampusAdmin, AdminDocument } from '../schemas/admin.schema';
 import { AdminDto } from './admin.dto';
-import { exec } from "child_process";
 
 @Injectable()
 export class AdminService {
