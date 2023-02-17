@@ -12,4 +12,7 @@ export class CampusDto {
   @IsString()
   @IsNotEmpty()
   campusAddress: string;
+  @IsString()
+  @IsNotEmpty()
+  organizationID: string;
 }

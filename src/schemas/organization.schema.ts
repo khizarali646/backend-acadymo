@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
-import { User } from '../user/user.schema';
+import { Document, SchemaTypes } from "mongoose";
+import { User } from './user.schema';
 
 export type OrganizationDocument = Organization & Document;
 
@@ -21,8 +21,8 @@ export class Organization {
   @Prop()
   noOfCampus: number;
 
-  @Prop({ ref: 'User', required: true })
-  owner: User;
+  @Prop({ type: SchemaTypes.ObjectId, ref: 'User' })
+  userId?: string;
 }
 
 export const OrganizationSchema = SchemaFactory.createForClass(Organization);

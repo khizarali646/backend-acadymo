@@ -5,7 +5,7 @@ import {
   Organization,
   OrganizationDocument,
 } from '../schemas/organization.schema';
-import { OrganizationDto } from './organization.dto';
+import { OrganizationDto } from '../dto/organization.dto';
 
 @Injectable()
 export class OrganizationService {
@@ -30,13 +30,16 @@ export class OrganizationService {
     return await this.organizationModel.find().exec();
   }
 
-  async findOne(id: string): Promise<OrganizationDto> {
-    return await this.organizationModel.findOne({ OrganizationID: id }).exec();
-  }
-  // async findOrganizationByUser(userId: string) {
-  //   const user = await this.userModel.findById(userId).populate('organization').exec();
-  //   return user.organization;
+  // async findOne(id: string): Promise<OrganizationDto> {
+  //   return await this.organizationModel.findOne({ OrganizationID: id }).exec();
   // }
+  async findOne(userId: string) {
+    const user = await this.organizationModel
+      .findById(userId)
+      .populate('organization')
+      .exec();
+    return user;
+  }
 
   async remove(id: string): Promise<OrganizationDto> {
     return await this.organizationModel

@@ -12,7 +12,7 @@ import { AuthService } from './auth.service';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post()
+  @Post('')
   async authenticateUser(
     @Body() loginRequest: UserAuthDto,
   ): Promise<UserAuthResponseDto> {

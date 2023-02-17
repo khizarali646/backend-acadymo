@@ -3,6 +3,9 @@ import { IsString, IsNotEmpty, IsEmail } from 'class-validator';
 export class UserDto {
   @IsString()
   @IsNotEmpty()
+  userId: string;
+  @IsString()
+  @IsNotEmpty()
   @IsEmail()
   emailAddress: string;
   @IsString()
@@ -11,4 +14,7 @@ export class UserDto {
   @IsString()
   @IsNotEmpty()
   role: string;
+  @IsString()
+  @IsNotEmpty()
+  profile: object;
 }

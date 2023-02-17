@@ -2,7 +2,7 @@
 // import { Reflector } from '@nestjs/core';
 //
 // @Injectable()
-// export class SuperAdminGuard implements CanActivate {
+// export classess SuperAdminGuard implements CanActivate {
 //   constructor(private readonly reflector: Reflector) {}
 //
 //   canActivate(context: ExecutionContext): boolean {

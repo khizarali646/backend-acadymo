@@ -8,7 +8,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
-import { AdminDto } from './admin.dto';
+import { AdminDto } from '../dto/admin.dto';
 
 @Controller('campusAdmin')
 export class AdminController {

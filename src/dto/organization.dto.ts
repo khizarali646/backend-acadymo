@@ -13,4 +13,7 @@ export class OrganizationDto {
   @IsString()
   @IsNotEmpty()
   noOfCampus: number;
+  // @IsString()
+  // @IsNotEmpty()
+  // userId: string;
 }

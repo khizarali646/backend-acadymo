@@ -2,7 +2,8 @@ import { Body, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Campus, CampusDocument } from '../schemas/campus.schema';
 import { Model } from 'mongoose';
-import { CampusDto } from './campus.dto';
+import { CampusDto } from '../dto/campus.dto';
+import { AttendanceDocument } from "../schemas/attendance.schema";
 
 @Injectable()
 export class CampusService {
@@ -19,11 +20,20 @@ export class CampusService {
       throw new HttpException('Campus ID Already Exists', HttpStatus.CONFLICT);
     }
   }
+  // async findAll(): Promise<CampusDocument[]> {
+  //   return this.campusModel.find().exec();
+  // }
+  // async findOne(id: string): Promise<CampusDocument> {
+  //   return this.campusModel.findOne({ _id: id }).exec();
+  // }
   async findAll(): Promise<CampusDocument[]> {
-    return this.campusModel.find().exec();
+    return await this.campusModel.find().populate('organizationID').exec();
   }
   async findOne(id: string): Promise<CampusDocument> {
-    return this.campusModel.findOne({ _id: id }).exec();
+    return await this.campusModel
+      .findOne({ _id: id })
+      .populate('organizationID')
+      .exec();
   }
 
   async update(

@@ -11,6 +11,10 @@ import { TeacherModule } from './teacher/teacher.module';
 import { StudentModule } from './student/student.module';
 import { ClassModule } from './class/class.module';
 import { ParentModule } from './parent/parent.module';
+import { SubjectModule } from './subjects/subject.module';
+import { UpcomingEventModule } from './upcoming-events/upcoming-event.module';
+import { NotificationModule } from './notifications/notification.module';
+import { AttendanceModule } from './attendance/attendance.module';
 
 @Module({
   imports: [
@@ -33,6 +37,10 @@ import { ParentModule } from './parent/parent.module';
     StudentModule,
     ClassModule,
     ParentModule,
+    SubjectModule,
+    UpcomingEventModule,
+    NotificationModule,
+    AttendanceModule,
   ],
   controllers: [AppController],
   providers: [],

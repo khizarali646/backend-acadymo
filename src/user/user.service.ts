@@ -1,8 +1,13 @@
 import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from './user.schema';
+import { User, UserDocument } from '../schemas/user.schema';
 import { Model } from 'mongoose';
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { UserDto } from './user.dto';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { UserDto } from '../dto/user.dto';
 import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UserService {
@@ -11,14 +16,21 @@ export class UserService {
   ) {}
 
   async findUserByEmailAddress({ emailAddress }): Promise<UserDto> {
-    return this.model.findOne({ emailAddress: emailAddress }).lean();
+    try {
+      return this.model.findOne({ emailAddress: emailAddress }).lean();
+    } catch (e) {
+      throw new HttpException(
+        'Unable to find user',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
-
-  async createUser({ emailAddress, password, role }): Promise<string> {
+  async createUser({ emailAddress, password, role, profile }): Promise<string> {
     const createdUser = await this.model.create({
       emailAddress: emailAddress,
       password: await bcrypt.hash(password, 10),
       role: role,
+      profile: profile,
     });
     return createdUser._id;
   }
@@ -32,14 +44,35 @@ export class UserService {
   //   return createdUser._id;
   // }
   async findAll(): Promise<UserDocument[]> {
-    return this.model.find().exec();
+    try {
+      return await this.model.find().exec();
+    } catch (e) {
+      throw new HttpException(
+        'Unable to find user',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   async findOne(id: string): Promise<UserDocument> {
-    return this.model.findById(id);
+    try {
+      return await this.model.findById(id).select({ password: 0 });
+    } catch (e) {
+      throw new HttpException(
+        'Unable to find user',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
   async update(id: string, updateDto: UserDto): Promise<UserDocument> {
-    return this.model.findByIdAndUpdate(id, updateDto);
+    try {
+      return await this.model.findByIdAndUpdate(id, updateDto);
+    } catch (e) {
+      throw new HttpException(
+        'Unable to update user',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
   async remove(id: string): Promise<UserDocument> {
     const user = await this.findOne(id);

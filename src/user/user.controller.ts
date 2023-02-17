@@ -22,15 +22,10 @@ import { RoleGuard } from '../guards/roles.guard';
 export class UserController {
   constructor(private user: UserService) {}
 
-  @Get('test')
-  testEndpoint(): string {
-    return 'Ok';
-  }
-
-  @Get('/super-admin')
+  @Get('/admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
   @UsePipes(new ValidationPipe({ transform: true }))
-  @SetMetadata('roles', ['super-admin'])
+  @SetMetadata('roles', ['super-admin', 'admin'])
   getUser(@Request() request): object {
     const { user } = request;
     const foundUser = this.user.findUserByEmailAddress({
@@ -38,21 +33,18 @@ export class UserController {
     });
     return foundUser;
   }
-  @Get('/admin')
-  @UseGuards(JwtAuthGuard, RoleGuard)
-  @SetMetadata('roles', ['admin'])
-  getAdmin(@Request() request): object {
-    const { user } = request;
-    const foundUser = this.user.findUserByEmailAddress({
-      emailAddress: user.emailAddress,
-    });
-    return foundUser;
-  }
-
   @Get('/profile')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  @SetMetadata('roles', ['teacher', 'parent', 'student', 'admin'])
-  getTeacher(@Request() request): object {
+  @SetMetadata('roles', [
+    'organization-owner',
+    'organization-admin',
+    'teacher',
+    'parent',
+    'student',
+    'admin',
+    'accounts',
+  ])
+  async getProfile(@Request() request): Promise<object> {
     const { user } = request;
     const foundUser = this.user.findUserByEmailAddress({
       emailAddress: user.emailAddress,
@@ -63,20 +55,26 @@ export class UserController {
   @Post('/create')
   async createUser(@Body() request): Promise<object> {
     try {
-      const { emailAddress, password, role } = request;
+      const { emailAddress, password, role, profile } = request;
       const createdUserId = await this.user.createUser({
         emailAddress,
         password,
         role,
+        profile,
       });
       return {
         createdUserId: createdUserId,
       };
     } catch (e) {
+      console.log(e);
       throw new HttpException('Forbidden', HttpStatus.CONFLICT);
     }
   }
-  @Get(':id')
+  @Get(':emailAddress')
+  async findUserByEmail(@Param('emailAddress') emailAddress: string) {
+    return this.user.findUserByEmailAddress({ emailAddress });
+  }
+  @Get('id/:id')
   async findOne(@Param('id') id: string) {
     return this.user.findOne(id);
   }

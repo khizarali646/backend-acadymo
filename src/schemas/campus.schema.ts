@@ -15,7 +15,7 @@ export class Campus {
   campusAddress: string;
 
   @Prop({ type: SchemaTypes.ObjectId, ref: 'Organization' })
-  OrganizationID: string;
+  organizationID: string;
 }
 
 export const CampusSchema = SchemaFactory.createForClass(Campus);
