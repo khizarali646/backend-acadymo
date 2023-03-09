@@ -15,7 +15,6 @@ export class SubjectService {
       const createdSubject = new this.SubjectModel(createSubjectDto);
       return await createdSubject.save();
     } catch (e) {
-      console.log(e);
       throw new HttpException('SUBJECT ALREADY Exists', HttpStatus.CONFLICT);
     }
   }
