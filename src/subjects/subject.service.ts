@@ -8,14 +8,14 @@ import { SubjectDto } from '../dto/subject.dto';
 export class SubjectService {
   constructor(
     @InjectModel(Subject.name) private SubjectModel: Model<SubjectDocument>,
-  ) {
-  }
+  ) {}
 
   async create(createSubjectDto: SubjectDto): Promise<SubjectDocument> {
     try {
       const createdSubject = new this.SubjectModel(createSubjectDto);
       return await createdSubject.save();
     } catch (e) {
+      console.log(e);
       throw new HttpException('SUBJECT ALREADY Exists', HttpStatus.CONFLICT);
     }
   }
