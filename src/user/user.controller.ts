@@ -70,6 +70,13 @@ export class UserController {
       throw new HttpException('Forbidden', HttpStatus.CONFLICT);
     }
   }
+
+  @Get(':id')
+  async getUsers(@Param('id') id: string) {
+    const user = await this.user.getUserWithOrganizationAndCampuses(id);
+    return user;
+  }
+
   @Get(':emailAddress')
   async findUserByEmail(@Param('emailAddress') emailAddress: string) {
     return this.user.findUserByEmailAddress({ emailAddress });

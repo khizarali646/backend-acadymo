@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Campus, CampusDocument } from '../schemas/campus.schema';
 import { Model } from 'mongoose';
 import { CampusDto } from '../dto/campus.dto';
-import { AttendanceDocument } from "../schemas/attendance.schema";
 
 @Injectable()
 export class CampusService {
@@ -26,13 +25,19 @@ export class CampusService {
   // async findOne(id: string): Promise<CampusDocument> {
   //   return this.campusModel.findOne({ _id: id }).exec();
   // }
+  async findOrganization(id: string): Promise<CampusDocument> {
+    return this.campusModel.findById(id).populate({
+      path: 'organizationId',
+      populate: { path: 'userId' },
+    });
+  }
   async findAll(): Promise<CampusDocument[]> {
-    return await this.campusModel.find().populate('organizationID').exec();
+    return await this.campusModel.find().exec();
   }
   async findOne(id: string): Promise<CampusDocument> {
     return await this.campusModel
       .findOne({ _id: id })
-      .populate('organizationID')
+      .populate('organization')
       .exec();
   }
 

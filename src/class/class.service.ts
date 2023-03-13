@@ -14,6 +14,7 @@ export class ClassService {
       const createdClass = new this.ClassModel(classDto);
       return await createdClass.save();
     } catch (e) {
+      console.log(e);
       throw new HttpException('Class Already Register', HttpStatus.CONFLICT);
     }
   }

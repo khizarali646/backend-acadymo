@@ -21,10 +21,7 @@ export class CampusController {
     try {
       return this.campusService.create(createCampusDto);
     } catch (e) {
-      throw new HttpException(
-        'Organization ID Already Exists',
-        HttpStatus.CONFLICT,
-      );
+      throw new HttpException('Campus ID Already Exists', HttpStatus.CONFLICT);
     }
   }
   @Get()

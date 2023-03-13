@@ -33,12 +33,18 @@ export class OrganizationService {
   // async findOne(id: string): Promise<OrganizationDto> {
   //   return await this.organizationModel.findOne({ OrganizationID: id }).exec();
   // }
-  async findOne(userId: string) {
-    const user = await this.organizationModel
-      .findById(userId)
-      .populate('organization')
+  async findOne(id: string): Promise<Organization> {
+    return await this.organizationModel
+      .findOne({ _id: id })
+      .populate('userId', '_id emailAddress role ')
+      .populate({
+        path: 'campusId',
+        populate: {
+          path: 'class',
+          model: 'Class',
+        },
+      })
       .exec();
-    return user;
   }
 
   async remove(id: string): Promise<OrganizationDto> {

@@ -1,5 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, SchemaTypes, Types } from 'mongoose';
+import { Document } from 'mongoose';
+import * as mongoose from 'mongoose';
+import { Section } from './section.schema';
+import { Class } from './class.schema';
 
 export type SubjectDocument = Subject & Document;
 
@@ -14,11 +17,14 @@ export class Subject {
   @Prop({ unique: true })
   subjectCode: string;
 
-  @Prop({ type: SchemaTypes.ObjectId, ref: 'Organization' })
-  organizationId: string;
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Section' }] })
+  sectionId: Section;
 
-  @Prop({ type: SchemaTypes.ObjectId, ref: 'Class' })
-  classId: string;
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Class' }] })
+  classId: Class;
+
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Teacher' }] })
+  teacherId: string;
 }
 
 export const SubjectSchema = SchemaFactory.createForClass(Subject);

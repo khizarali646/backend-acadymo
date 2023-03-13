@@ -15,6 +15,8 @@ import { SubjectModule } from './subjects/subject.module';
 import { UpcomingEventModule } from './upcoming-events/upcoming-event.module';
 import { NotificationModule } from './notifications/notification.module';
 import { AttendanceModule } from './attendance/attendance.module';
+import { TimetableModule } from './timetable/timetable.module';
+import { SectionModule } from './section/section.module';
 
 @Module({
   imports: [
@@ -41,6 +43,8 @@ import { AttendanceModule } from './attendance/attendance.module';
     UpcomingEventModule,
     NotificationModule,
     AttendanceModule,
+    TimetableModule,
+    SectionModule,
   ],
   controllers: [AppController],
   providers: [],
