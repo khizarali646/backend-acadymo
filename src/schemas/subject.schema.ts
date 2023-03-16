@@ -8,10 +8,10 @@ export type SubjectDocument = Subject & Document;
 
 @Schema()
 export class Subject {
-  @Prop({})
+  @Prop({ required: true })
   subjectName: string;
 
-  @Prop({ unique: true })
+  @Prop({ required: true, unique: true })
   subjectCode: string;
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Section' }] })
