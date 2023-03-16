@@ -8,9 +8,6 @@ export type SectionDocument = Section & Document;
 
 @Schema()
 export class Section {
-  @Prop({ required: true, unique: true })
-  sectionId: string;
-
   @Prop({ required: true })
   sectionName: string;
 

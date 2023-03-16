@@ -12,11 +12,14 @@ import {
   Param,
   ValidationPipe,
   Delete,
+  ClassSerializerInterceptor,
+  UseInterceptors,
 } from '@nestjs/common';
 
 import { UserService } from './user.service';
 import { JwtAuthGuard } from '../guards/auth.guard';
 import { RoleGuard } from '../guards/roles.guard';
+import { UserDto } from '../dto/user.dto';
 
 @Controller('user')
 export class UserController {
@@ -35,16 +38,8 @@ export class UserController {
   }
   @Get('/profile')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  @SetMetadata('roles', [
-    'organization-owner',
-    'organization-admin',
-    'teacher',
-    'parent',
-    'student',
-    'admin',
-    'accounts',
-  ])
-  async getProfile(@Request() request): Promise<object> {
+  @UseInterceptors(ClassSerializerInterceptor)
+  async getProfile(@Request() request): Promise<UserDto> {
     const { user } = request;
     const foundUser = this.user.findUserByEmailAddress({
       emailAddress: user.emailAddress,

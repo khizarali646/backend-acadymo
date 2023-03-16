@@ -8,9 +8,6 @@ export type SubjectDocument = Subject & Document;
 
 @Schema()
 export class Subject {
-  @Prop({ unique: true })
-  subjectId: string;
-
   @Prop({})
   subjectName: string;
 

@@ -11,10 +11,7 @@ export class Class {
   @Prop({ required: true })
   className: string;
 
-  @Prop({ required: true })
-  subjectName: string;
-
-  @Prop({ required: true })
+  @Prop({})
   noOfStudent: number;
 
   @Prop({ type: SchemaTypes.ObjectId, ref: 'Campus' })
