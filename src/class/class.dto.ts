@@ -6,9 +6,6 @@ export class ClassDto {
   classname: string;
   @IsNotEmpty()
   @IsString()
-  subjectName: string;
-  @IsNotEmpty()
-  @IsString()
   noOfStudent: number;
   @IsNotEmpty()
   @IsString()
