@@ -17,7 +17,11 @@ export class ClassController {
 
   @Post('/create')
   async create(@Body() createClassDto: ClassDto) {
-    return this.classService.create(createClassDto);
+    try {
+      return this.classService.create(createClassDto);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   @Get()

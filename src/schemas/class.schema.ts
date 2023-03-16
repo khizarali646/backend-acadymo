@@ -8,7 +8,7 @@ export type ClassDocument = Class & Document;
 
 @Schema()
 export class Class {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   className: string;
 
   @Prop({})
