@@ -12,8 +12,6 @@ import {
   Param,
   ValidationPipe,
   Delete,
-  ClassSerializerInterceptor,
-  UseInterceptors,
 } from '@nestjs/common';
 
 import { UserService } from './user.service';
@@ -38,7 +36,6 @@ export class UserController {
   }
   @Get('/profile')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  @UseInterceptors(ClassSerializerInterceptor)
   async getProfile(@Request() request): Promise<UserDto> {
     const { user } = request;
     const foundUser = this.user.findUserByEmailAddress({
