@@ -20,7 +20,7 @@ export class TaskController {
     return this.TaskService.create(createTaskDto);
   }
 
-  @Get()
+  @Get('/list')
   async findAll(): Promise<TaskDocument[]> {
     return this.TaskService.findAll();
   }
