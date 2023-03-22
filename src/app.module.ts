@@ -17,6 +17,7 @@ import { NotificationModule } from './notifications/notification.module';
 import { AttendanceModule } from './attendance/attendance.module';
 import { TimetableModule } from './timetable/timetable.module';
 import { SectionModule } from './section/section.module';
+import { TaskModule } from './task/task.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { SectionModule } from './section/section.module';
     AttendanceModule,
     TimetableModule,
     SectionModule,
+    TaskModule,
   ],
   controllers: [AppController],
   providers: [],
