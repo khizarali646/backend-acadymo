@@ -4,8 +4,8 @@ import { AssignToController } from './assign-to.controller';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Assign, AssignSchema } from '../schemas/assignTo';
-import { Class, ClassSchema } from "../schemas/class.schema";
-import { Teacher, TeacherSchema } from "../schemas/teacher.schema";
+import { Class, ClassSchema } from '../schemas/class.schema';
+import { Teacher, TeacherSchema } from '../schemas/teacher.schema';
 
 @Module({
   providers: [AssignToService],

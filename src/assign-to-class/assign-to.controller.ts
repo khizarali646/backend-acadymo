@@ -1,7 +1,7 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { AssignToService } from './assign-to.service';
-import { Assign, AssignDocument } from "../schemas/assignTo";
 import { AssignToDto } from '../dto/assignTo';
+import { AssignDocument } from '../schemas/assignTo';
 
 @Controller('assign-to-class')
 export class AssignToController {
@@ -44,5 +44,15 @@ export class AssignToController {
       teacherId,
     );
     return { teacherAssignClass };
+  }
+  @Get('teacher/:teacherId')
+  async getAssignedClassesForTeacher(
+    @Param('teacherId') teacherId: string,
+  ): Promise<AssignDocument[]> {
+    return this.assignService.getAssignedClassesForTeacher(teacherId);
+  }
+  @Delete('/teacher/:teacherId')
+  async delete(@Param('teacherId') teacherId: string): Promise<AssignDocument> {
+    return this.assignService.delete(teacherId);
   }
 }
