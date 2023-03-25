@@ -19,7 +19,6 @@ import { TimetableModule } from './timetable/timetable.module';
 import { SectionModule } from './section/section.module';
 import { TaskModule } from './task/task.module';
 import { AssignToModule } from './assign-to-class/assign-to.module';
-import { MulterModule } from './multer/multer.module';
 
 @Module({
   imports: [
@@ -50,7 +49,6 @@ import { MulterModule } from './multer/multer.module';
     SectionModule,
     TaskModule,
     AssignToModule,
-    MulterModule,
   ],
   controllers: [AppController],
   providers: [],
