@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpException,
+  HttpStatus,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { AssignToService } from './assign-to.service';
 import { AssignToDto } from '../dto/assignTo';
 import { AssignDocument } from '../schemas/assignTo';
@@ -45,6 +54,37 @@ export class AssignToController {
     );
     return { teacherAssignClass };
   }
+  @Post('/assign')
+  async assignClasses(
+    @Body('classIds') classIds: string[],
+    @Body('teacherId') teacherId: string,
+  ) {
+    try {
+      const teacherAssignments = [];
+
+      if (!Array.isArray(classIds)) {
+        console.log(classIds);
+        throw new HttpException(
+          'classIds must be an array',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+
+      for (const classId of classIds) {
+        const teacherAssignment = await this.assignService.asignClassess(
+          classId,
+          teacherId,
+        );
+
+        teacherAssignments.push(teacherAssignment);
+      }
+
+      return { teacherAssignments };
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   @Get('teacher/:teacherId')
   async getAssignedClassesForTeacher(
     @Param('teacherId') teacherId: string,

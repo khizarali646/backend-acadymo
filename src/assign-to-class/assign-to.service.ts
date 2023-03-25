@@ -49,6 +49,29 @@ export class AssignToService {
         .populate('teacherId');
       return teacherAssignClass;
     } catch (e) {
+      console.log(e);
+      throw new HttpException(
+        'Teacher is already assigned to a class',
+        HttpStatus.CONFLICT,
+      );
+    }
+  }
+
+  async asignClassess(
+    classId: string,
+    teacherId: string,
+  ): Promise<AssignDocument> {
+    try {
+      const teacherAssignClass = await this.AssignModel.findOneAndUpdate(
+        { classId: classId },
+        { teacherId: teacherId },
+        { new: true, upsert: true },
+      )
+        .populate('classId')
+        .populate('teacherId');
+      return teacherAssignClass;
+    } catch (e) {
+      console.log(e);
       throw new HttpException(
         'Teacher is already assigned to a class',
         HttpStatus.CONFLICT,
