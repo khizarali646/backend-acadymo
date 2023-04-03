@@ -10,6 +10,8 @@ import {
 import { UserDto } from '../dto/user.dto';
 import * as bcrypt from 'bcrypt';
 import { Organization } from '../schemas/organization.schema';
+import { Query } from 'express-serve-static-core';
+
 @Injectable()
 export class UserService {
   constructor(
@@ -55,8 +57,9 @@ export class UserService {
   // }
   async findAll(): Promise<UserDocument[]> {
     try {
-      return await this.model.find().select({ password: 0 }).exec();
+      return await this.model.find().exec();
     } catch (e) {
+      console.log(e);
       throw new HttpException(
         'Unable to find user',
         HttpStatus.INTERNAL_SERVER_ERROR,
@@ -72,16 +75,28 @@ export class UserService {
       })
       .exec();
   }
-  // async findOne(id: string): Promise<UserDocument> {
-  //   try {
-  //     return await this.model.findById(id).select({ password: 0 });
-  //   } catch (e) {
-  //     throw new HttpException(
-  //       'Unable to find user',
-  //       HttpStatus.INTERNAL_SERVER_ERROR,
-  //     );
-  //   }
-  // }
+  async getAllUser(query: Query): Promise<UserDocument[]> {
+    const resPerPage = 2;
+    const currentPage = typeof query.page === 'number' ? query.page : 1;
+    const skip = resPerPage * (currentPage - 1);
+
+    const keyword =
+      typeof query.keyword === 'string'
+        ? {
+            title: {
+              $regex: query.keyword,
+              $options: 'i',
+            },
+          }
+        : {};
+
+    const user = await this.model
+      .find({ ...keyword })
+      .limit(resPerPage)
+      .skip(skip);
+    return user;
+  }
+
   async update(id: string, updateDto: UserDto): Promise<UserDocument> {
     try {
       return await this.model.findByIdAndUpdate(id, updateDto);

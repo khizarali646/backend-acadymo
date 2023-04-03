@@ -12,14 +12,18 @@ import {
   Param,
   ValidationPipe,
   Delete,
-  ClassSerializerInterceptor,
   UseInterceptors,
+  UploadedFile,
+  Query,
 } from '@nestjs/common';
+import { Query as ExpressQuery } from 'express-serve-static-core';
 
 import { UserService } from './user.service';
 import { JwtAuthGuard } from '../guards/auth.guard';
 import { RoleGuard } from '../guards/roles.guard';
 import { UserDto } from '../dto/user.dto';
+import { multerUpload } from '../multer/multer.middleware';
+import { UserDocument } from '../schemas/user.schema';
 
 @Controller('user')
 export class UserController {
@@ -36,6 +40,7 @@ export class UserController {
     });
     return foundUser;
   }
+
   @Get('/profile')
   @UseGuards(JwtAuthGuard, RoleGuard)
   async getProfile(@Request() request): Promise<UserDto> {
@@ -75,16 +80,44 @@ export class UserController {
   async findUserByEmail(@Param('emailAddress') emailAddress: string) {
     return this.user.findUserByEmailAddress({ emailAddress });
   }
+
   @Get('id/:id')
   async findOne(@Param('id') id: string) {
     return this.user.findOne(id);
   }
   @Get()
+  async getAllUser(@Query() query: ExpressQuery): Promise<UserDocument[]> {
+    return this.user.getAllUser(query);
+  }
+  @Get('/list')
   async findAll() {
     return this.user.findAll();
   }
+
   @Delete(':id')
   async remove(@Param('id') id: string): Promise<void> {
     await this.user.remove(id);
   }
+
+  @Post('/file')
+  @UseInterceptors(multerUpload())
+  handleUpload(@UploadedFile() file: Express.Multer.File) {
+    console.log('file', file);
+    return 'File upload API';
+  }
+
+  @Post('/fileUpload')
+  @UseInterceptors()
+  fileUpload(@UploadedFile() file: Express.Multer.File) {
+    return 'File upload success';
+  }
+  // For S3 bucket code
+  // @Post('/upload')
+  // @UseInterceptors(multerUpload())
+  // async handleUpload(
+  //   @UploadedFile() file: Express.Multer.File,
+  // ): Promise<string> {
+  //   console.log('Uploaded file:', file);
+  //   return 'File uploaded successfully';
+  // }
 }
