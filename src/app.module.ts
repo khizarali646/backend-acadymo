@@ -19,6 +19,7 @@ import { TimetableModule } from './timetable/timetable.module';
 import { SectionModule } from './section/section.module';
 import { TaskModule } from './task/task.module';
 import { AssignToModule } from './assign-to-class/assign-to.module';
+import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { AssignToModule } from './assign-to-class/assign-to.module';
     SectionModule,
     TaskModule,
     AssignToModule,
+    SearchModule,
   ],
   controllers: [AppController],
   providers: [],
