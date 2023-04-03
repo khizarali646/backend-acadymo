@@ -12,8 +12,6 @@ import {
   Param,
   ValidationPipe,
   Delete,
-  UseInterceptors,
-  UploadedFile,
   Query,
 } from '@nestjs/common';
 import { Query as ExpressQuery } from 'express-serve-static-core';
@@ -22,7 +20,6 @@ import { UserService } from './user.service';
 import { JwtAuthGuard } from '../guards/auth.guard';
 import { RoleGuard } from '../guards/roles.guard';
 import { UserDto } from '../dto/user.dto';
-import { multerUpload } from '../multer/multer.middleware';
 import { UserDocument } from '../schemas/user.schema';
 
 @Controller('user')
@@ -99,7 +96,7 @@ export class UserController {
     await this.user.remove(id);
   }
 
-  @Post('/file')
+ /* @Post('/file')
   @UseInterceptors(multerUpload())
   handleUpload(@UploadedFile() file: Express.Multer.File) {
     console.log('file', file);
@@ -110,7 +107,7 @@ export class UserController {
   @UseInterceptors()
   fileUpload(@UploadedFile() file: Express.Multer.File) {
     return 'File upload success';
-  }
+  }*/
   // For S3 bucket code
   // @Post('/upload')
   // @UseInterceptors(multerUpload())
