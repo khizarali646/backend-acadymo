@@ -96,7 +96,7 @@ export class UserController {
     await this.user.remove(id);
   }
 
- /* @Post('/file')
+  /* @Post('/file')
   @UseInterceptors(multerUpload())
   handleUpload(@UploadedFile() file: Express.Multer.File) {
     console.log('file', file);

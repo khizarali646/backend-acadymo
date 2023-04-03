@@ -77,18 +77,17 @@ export class UserService {
   }
   async getAllUser(query: Query): Promise<UserDocument[]> {
     const resPerPage = 2;
-    const currentPage = typeof query.page === 'number' ? query.page : 1;
+    const currentPage = Number(query.page) || 1;
     const skip = resPerPage * (currentPage - 1);
 
-    const keyword =
-      typeof query.keyword === 'string'
-        ? {
-            title: {
-              $regex: query.keyword,
-              $options: 'i',
-            },
-          }
-        : {};
+    const keyword = query.keyword
+      ? {
+          title: {
+            $regex: query.keyword,
+            $options: 'i',
+          },
+        }
+      : {};
 
     const user = await this.model
       .find({ ...keyword })
