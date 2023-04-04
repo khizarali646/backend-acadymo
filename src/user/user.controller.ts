@@ -82,11 +82,11 @@ export class UserController {
   async findOne(@Param('id') id: string) {
     return this.user.findOne(id);
   }
-  @Get()
+  /* @Get()
   async getAllUser(@Query() query: ExpressQuery): Promise<UserDocument[]> {
     return this.user.getAllUser(query);
-  }
-  @Get('/list')
+  }*/
+  @Get()
   async findAll() {
     return this.user.findAll();
   }
