@@ -7,10 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { OrganizationModule } from './organization/organization.module';
 import { CampusModule } from './campus/campus.module';
 import { AdminModule } from './admin/admin.module';
-import { TeacherModule } from './teacher/teacher.module';
-import { StudentModule } from './student/student.module';
 import { ClassModule } from './class/class.module';
-import { ParentModule } from './parent/parent.module';
 import { SubjectModule } from './subjects/subject.module';
 import { UpcomingEventModule } from './upcoming-events/upcoming-event.module';
 import { NotificationModule } from './notifications/notification.module';
@@ -18,8 +15,11 @@ import { AttendanceModule } from './attendance/attendance.module';
 import { TimetableModule } from './timetable/timetable.module';
 import { SectionModule } from './section/section.module';
 import { TaskModule } from './task/task.module';
-import { AssignToModule } from './assign-to-class/assign-to.module';
-import { SearchModule } from './search/search.module';
+import { SearchModule } from './top-search/search.module';
+import { TeacherAssignTaskToStudentModule } from './teacher-assign-task-to-student/teacher-assign-task-to-student.module';
+import { S3UploadModule } from './s3-upload/s3-upload.module';
+import { StudentModule } from './search/student/student.module';
+import { StudentSearchModule } from './student-search/student-search.module';
 
 @Module({
   imports: [
@@ -38,10 +38,7 @@ import { SearchModule } from './search/search.module';
     OrganizationModule,
     CampusModule,
     AdminModule,
-    TeacherModule,
-    StudentModule,
     ClassModule,
-    ParentModule,
     SubjectModule,
     UpcomingEventModule,
     NotificationModule,
@@ -49,8 +46,11 @@ import { SearchModule } from './search/search.module';
     TimetableModule,
     SectionModule,
     TaskModule,
-    AssignToModule,
     SearchModule,
+    TeacherAssignTaskToStudentModule,
+    S3UploadModule,
+    StudentModule,
+    StudentSearchModule,
   ],
   controllers: [AppController],
   providers: [],
