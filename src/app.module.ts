@@ -16,7 +16,7 @@ import { TimetableModule } from './timetable/timetable.module';
 import { SectionModule } from './section/section.module';
 import { TaskModule } from './task/task.module';
 import { TeacherAssignTaskToStudentModule } from './teacher-assign-task-to-student/teacher-assign-task-to-student.module';
-import { SearchModule } from './top-search/search.module';
+import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [
