@@ -15,9 +15,8 @@ import { AttendanceModule } from './attendance/attendance.module';
 import { TimetableModule } from './timetable/timetable.module';
 import { SectionModule } from './section/section.module';
 import { TaskModule } from './task/task.module';
-import { SearchModule } from './top-search/search.module';
 import { TeacherAssignTaskToStudentModule } from './teacher-assign-task-to-student/teacher-assign-task-to-student.module';
-import { StudentModule } from './search/student/student.module';
+import { SearchModule } from './top-search/search.module';
 
 @Module({
   imports: [
@@ -46,7 +45,6 @@ import { StudentModule } from './search/student/student.module';
     TaskModule,
     SearchModule,
     TeacherAssignTaskToStudentModule,
-    StudentModule,
   ],
   controllers: [AppController],
   providers: [],
