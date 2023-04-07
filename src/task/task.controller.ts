@@ -45,10 +45,4 @@ export class TaskController {
   async remove(id: string): Promise<TaskDocument> {
     return this.TaskService.remove(id);
   }
-
-  @Post('')
-  @UseInterceptors(multerUpload())
-  uploadFIle(@UploadedFile() file: Express.Multer.File) {
-    return 'File uploaded';
-  }
 }
