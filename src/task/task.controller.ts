@@ -6,17 +6,14 @@ import {
   Delete,
   Body,
   Param,
-  UseInterceptors, UploadedFile
-} from "@nestjs/common";
+} from '@nestjs/common';
 import { TaskDto } from '../dto/task.dto';
 import { TaskService } from './task.service';
 import { TaskDocument } from '../schemas/task.schema';
-import { multerUpload } from "../multer/multer.middleware";
 
 @Controller('task')
 export class TaskController {
-  constructor(private readonly TaskService: TaskService) {
-  }
+  constructor(private readonly TaskService: TaskService) {}
 
   @Post('/create')
   async create(@Body() createTaskDto: TaskDto): Promise<TaskDocument> {

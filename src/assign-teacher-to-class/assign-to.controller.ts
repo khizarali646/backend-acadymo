@@ -9,7 +9,6 @@ import {
   Post,
 } from '@nestjs/common';
 import { AssignToService } from './assign-to.service';
-import { AssignToDto } from '../dto/assignTo';
 import { AssignDocument } from '../schemas/assignTeacherToClass.schema';
 
 @Controller('assign-teacher-to-class')

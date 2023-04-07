@@ -18,6 +18,7 @@ import { TaskModule } from './task/task.module';
 import { TeacherAssignTaskToStudentModule } from './teacher-assign-task-to-student/teacher-assign-task-to-student.module';
 import { SearchModule } from './search/search.module';
 import { StudentSearchModule } from './student-search/student-search.module';
+import { AssignToModule } from './assign-teacher-to-class/assign-to.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { StudentSearchModule } from './student-search/student-search.module';
     SearchModule,
     TeacherAssignTaskToStudentModule,
     StudentSearchModule,
+    AssignToModule
   ],
   controllers: [AppController],
   providers: [],
