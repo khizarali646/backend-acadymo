@@ -34,4 +34,27 @@ export class TeacherAssignTaskToStudentService {
       );
     }
   }
+
+  async teacherAssignMultipleTask(
+    taskId: string,
+    studentId: string,
+  ): Promise<TeacherAssignTaskDocument> {
+    try {
+      const teacherAssignMultipleTask =
+        await this.AssignTaskModel.findOneAndUpdate(
+          { taskId: taskId },
+          { studentId: studentId },
+          { new: true, upsert: true },
+        )
+          .populate('taskId')
+          .populate('studentId');
+      return teacherAssignMultipleTask;
+    } catch (e) {
+      console.log(e);
+      throw new HttpException(
+        'Teacher is already assigned to a class',
+        HttpStatus.CONFLICT,
+      );
+    }
+  }
 }

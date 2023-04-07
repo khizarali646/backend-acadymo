@@ -17,6 +17,8 @@ import { SectionModule } from './section/section.module';
 import { TaskModule } from './task/task.module';
 import { TeacherAssignTaskToStudentModule } from './teacher-assign-task-to-student/teacher-assign-task-to-student.module';
 import { SearchModule } from './search/search.module';
+import { S3UploadModule } from './s3-upload/s3-upload.module';
+import { StudentSearchModule } from "./student-search/student-search.module";
 
 @Module({
   imports: [
@@ -45,6 +47,7 @@ import { SearchModule } from './search/search.module';
     TaskModule,
     SearchModule,
     TeacherAssignTaskToStudentModule,
+    StudentSearchModule,
   ],
   controllers: [AppController],
   providers: [],

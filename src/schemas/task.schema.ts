@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import mongoose, { Document, Types } from 'mongoose';
+import { Class } from './class.schema';
 
 export type TaskDocument = Task & Document;
 
@@ -19,6 +20,12 @@ export class Task {
 
   @Prop({})
   endDate: Date;
+
+  @Prop({})
+  image: string;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Class' })
+  classId: Types.ObjectId;
 }
 
-export const TaskSchema = SchemaFactory.createForClass(Task)
+export const TaskSchema = SchemaFactory.createForClass(Task);
