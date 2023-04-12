@@ -57,4 +57,38 @@ export class TeacherAssignTaskToStudentService {
       );
     }
   }
+  async findAll(): Promise<TeacherAssignTaskDocument[]> {
+    const teacherAssignTasks = await this.AssignTaskModel.find()
+      .populate('taskId')
+      .populate('studentId');
+    return teacherAssignTasks;
+  }
+
+  async findTaskById(taskId: string): Promise<TeacherAssignTaskDocument> {
+    const teacherAssignTask = await this.AssignTaskModel.findById(taskId)
+      .populate('taskId')
+      .populate('studentId');
+    if (!teacherAssignTask) {
+      throw new HttpException('Task not found', HttpStatus.NOT_FOUND);
+    }
+    return teacherAssignTask;
+  }
+
+  async getTasksByStudentId(studentId: string): Promise<AssignTask[]> {
+    const tasks = await this.AssignTaskModel.find({ studentId })
+      .populate('taskId')
+      .populate('studentId')
+      .exec();
+
+    return tasks;
+  }
+
+  async getTaskById(taskId: string): Promise<AssignTask> {
+    const task = await this.AssignTaskModel.findById(taskId)
+      .populate('taskId')
+      .populate('studentId')
+      .exec();
+
+    return task;
+  }
 }

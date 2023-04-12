@@ -48,7 +48,7 @@ import { AssignToModule } from './assign-teacher-to-class/assign-to.module';
     SearchModule,
     TeacherAssignTaskToStudentModule,
     StudentSearchModule,
-    AssignToModule
+    AssignToModule,
   ],
   controllers: [AppController],
   providers: [],
