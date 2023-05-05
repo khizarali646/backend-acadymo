@@ -1,5 +1,6 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { AssignClassToStudentService } from "./assign-class-to-student.service";
+import { AssignClassDocument } from "../schemas/assignClassToStudent.schema";
 
 @Controller("assign-class-to-student")
 export class AssignClassToStudentController {
@@ -14,5 +15,11 @@ export class AssignClassToStudentController {
       studentId
     );
     return { AssignClassToStudent };
+  }
+  @Get("student/:studentId")
+  async getAssignedClassesForStudent(
+    @Param("studentId") studentId: string
+  ): Promise<AssignClassDocument[]> {
+    return this.assignService.getAssignedClassesForStudent(studentId);
   }
 }

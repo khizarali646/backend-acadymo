@@ -33,4 +33,9 @@ export class AssignClassToStudentService {
       );
     }
   }
+  async getAssignedClassesForStudent(
+    studentId: string
+  ): Promise<AssignClassDocument[]> {
+    return this.AssignModel.find({ studentId: studentId }).populate("classId");
+  }
 }
