@@ -1,8 +1,8 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, SchemaTypes } from 'mongoose';
-import { Campus } from './campus.schema';
-import * as mongoose from 'mongoose';
-import { Section } from './section.schema';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Document, SchemaTypes, Types } from "mongoose";
+import { Campus } from "./campus.schema";
+import * as mongoose from "mongoose";
+import { Section } from "./section.schema";
 
 export type ClassDocument = Class & Document;
 
@@ -14,11 +14,11 @@ export class Class {
   @Prop({})
   noOfStudent: number;
 
-  @Prop({ type: SchemaTypes.ObjectId, ref: 'Campus' })
+  @Prop({ type: SchemaTypes.ObjectId, ref: "Campus" })
   campusId: Campus;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Section' }] })
-  sectionId: Section[];
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Section" }] })
+  sectionId: Types.ObjectId[];
 }
 
 export const ClassSchema = SchemaFactory.createForClass(Class);
