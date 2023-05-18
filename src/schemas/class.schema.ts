@@ -14,7 +14,7 @@ export class Class {
   @Prop({ type: SchemaTypes.ObjectId, ref: "Campus" })
   campusId: Campus;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Section" }] })
+  @Prop({ type: { type: mongoose.Schema.Types.ObjectId, ref: "Section" } })
   sectionId: Types.ObjectId;
 }
 
