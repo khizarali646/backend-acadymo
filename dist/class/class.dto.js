@@ -18,20 +18,5 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], ClassDto.prototype, "classname", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", Number)
-], ClassDto.prototype, "noOfStudent", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], ClassDto.prototype, "campusId", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], ClassDto.prototype, "sectionId", void 0);
 exports.ClassDto = ClassDto;
 //# sourceMappingURL=class.dto.js.map

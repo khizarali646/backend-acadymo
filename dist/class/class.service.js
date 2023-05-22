@@ -38,6 +38,7 @@ let ClassService = class ClassService {
         return this.ClassModel.find().populate({
             path: "sectionId",
             select: "sectionName",
+            model: "Section",
         });
     }
     async update(id, UpdateClassDto) {

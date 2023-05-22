@@ -1,8 +1,8 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
-import * as mongoose from 'mongoose';
-import { Section } from './section.schema';
-import { Class } from './class.schema';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Document } from "mongoose";
+import * as mongoose from "mongoose";
+import { Section } from "./section.schema";
+import { Class } from "./class.schema";
 
 export type SubjectDocument = Subject & Document;
 
@@ -14,13 +14,13 @@ export class Subject {
   @Prop({ required: true, unique: true })
   subjectCode: string;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Section' }] })
+  @Prop({ type: { type: mongoose.Schema.Types.ObjectId, ref: "Section" } })
   sectionId: Section;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Class' }] })
+  @Prop({ type: { type: mongoose.Schema.Types.ObjectId, ref: "Class" } })
   classId: Class;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Teacher' }] })
+  @Prop({ type: { type: mongoose.Schema.Types.ObjectId, ref: "Teacher" } })
   teacherId: string;
 }
 

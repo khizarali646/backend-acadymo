@@ -22,10 +22,10 @@ export class ClassService {
     return this.ClassModel.findById(id);
   }
   async findAll(): Promise<ClassDocument[]> {
-    // return this.ClassModel.find().populate("sectionId");
     return this.ClassModel.find().populate({
       path: "sectionId",
       select: "sectionName",
+      model: "Section",
     });
   }
 
