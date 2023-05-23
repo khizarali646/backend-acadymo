@@ -23,12 +23,24 @@ let ClassService = class ClassService {
     }
     async create(classDto) {
         try {
-            const createdClass = new this.ClassModel(classDto);
-            return await createdClass.save();
+            const className = classDto.classname;
+            const sectionId = classDto.sectionId;
+            console.log({ className });
+            return this.ClassModel.findOneAndUpdate({
+                className: className,
+            }, {
+                $addToSet: {
+                    sectionId: sectionId,
+                },
+            }, {
+                upsert: true,
+                new: true,
+                setDefaultsOnInsert: true,
+            });
         }
         catch (e) {
             console.log(e);
-            throw new common_1.HttpException("Class Already Register", common_1.HttpStatus.CONFLICT);
+            throw new common_1.HttpException("Class Already Registered", common_1.HttpStatus.CONFLICT);
         }
     }
     async findOne(id) {

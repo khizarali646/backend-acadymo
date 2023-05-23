@@ -10,21 +10,18 @@ export class Class {
 
   // @Prop({
   //   type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Section" }],
-  //   unique: true,
+  //   validate: {
+  //     validator: async function (sectionId: Types.ObjectId[]) {
+  //       const count = await this.constructor.countDocuments({
+  //         className: this.className,
+  //         sectionId: { $in: sectionId },
+  //       });
+  //       return count === 0;
+  //     },
+  //     message: "Class with the same section already exists",
+  //   },
   // })
-  @Prop({
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Section" }],
-    validate: {
-      validator: async function (sectionIds: Types.ObjectId[]) {
-        const count = await this.constructor.countDocuments({
-          className: this.className,
-          sectionId: { $in: sectionIds },
-        });
-        return count === 0;
-      },
-      message: "Class with the same section already exists",
-    },
-  })
+  @Prop({ type: [{ type: Types.ObjectId, ref: "Section" }] })
   sectionId: Types.ObjectId[];
 }
 

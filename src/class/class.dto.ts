@@ -4,4 +4,7 @@ export class ClassDto {
   @IsNotEmpty()
   @IsString()
   classname: string;
+  @IsNotEmpty()
+  @IsString()
+  sectionId: [];
 }

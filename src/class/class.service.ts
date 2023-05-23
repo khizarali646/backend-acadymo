@@ -9,13 +9,50 @@ export class ClassService {
   constructor(
     @InjectModel(Class.name) private ClassModel: Model<ClassDocument>
   ) {}
+  // async create(classDto: ClassDto): Promise<ClassDocument> {
+  //   try {
+  //     const createdClass = new this.ClassModel(classDto);
+  //     return await createdClass.save();
+  //   } catch (e) {
+  //     console.log(e);
+  //     throw new HttpException("Class Already Register", HttpStatus.CONFLICT);
+  //   }
+  // }
   async create(classDto: ClassDto): Promise<ClassDocument> {
     try {
-      const createdClass = new this.ClassModel(classDto);
-      return await createdClass.save();
+      const className = classDto.classname;
+      const sectionId = classDto.sectionId;
+
+      console.log({ className });
+
+      return this.ClassModel.findOneAndUpdate(
+        {
+          className: className,
+        },
+        {
+          $addToSet: {
+            sectionId: sectionId,
+          },
+        },
+        {
+          upsert: true,
+          new: true,
+          setDefaultsOnInsert: true,
+        }
+      );
+
+      /*let existingClass = await this.ClassModel.findOne({ className });
+
+      if (existingClass) {
+        existingClass.sectionId.push(...sectionId);
+      } else {
+        existingClass = new this.ClassModel(classDto);
+      }
+
+      return await existingClass.save();*/
     } catch (e) {
       console.log(e);
-      throw new HttpException("Class Already Register", HttpStatus.CONFLICT);
+      throw new HttpException("Class Already Registered", HttpStatus.CONFLICT);
     }
   }
   async findOne(id: string): Promise<ClassDocument> {

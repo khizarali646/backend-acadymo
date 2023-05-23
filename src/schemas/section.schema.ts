@@ -8,5 +8,4 @@ export class Section {
   @Prop({ required: true, unique: true })
   sectionName: string;
 }
-
 export const SectionSchema = SchemaFactory.createForClass(Section);
