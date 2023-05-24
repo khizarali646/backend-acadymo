@@ -23,7 +23,7 @@ let ClassService = class ClassService {
     }
     async create(classDto) {
         try {
-            const className = classDto.classname;
+            const className = classDto.className;
             const sectionId = classDto.sectionId;
             console.log({ className });
             return this.ClassModel.findOneAndUpdate({

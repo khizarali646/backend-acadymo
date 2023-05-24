@@ -1,4 +1,4 @@
 export declare class ClassDto {
-    classname: string;
+    className: string;
     sectionId: [];
 }
