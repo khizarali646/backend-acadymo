@@ -9,6 +9,8 @@ export class Assign {
   classId: Types.ObjectId;
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }] })
   teacherId: Types.ObjectId;
+  @Prop()
+  sectionName: string;
 }
 export const AssignSchema = SchemaFactory.createForClass(Assign);
 

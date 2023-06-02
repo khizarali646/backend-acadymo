@@ -23,15 +23,17 @@ let AssignToController = class AssignToController {
         const teacherAssignClass = await this.assignService.assignClass(classId, teacherId);
         return { teacherAssignClass };
     }
-    async assignClasses(classIds, teacherId) {
+    async assignClasses(classIds, teacherId, sectionNames) {
         try {
             const teacherAssignments = [];
             if (!Array.isArray(classIds)) {
                 console.log(classIds);
-                throw new common_1.HttpException('classIds must be an array', common_1.HttpStatus.BAD_REQUEST);
+                throw new common_1.HttpException("classIds must be an array", common_1.HttpStatus.BAD_REQUEST);
             }
-            for (const classId of classIds) {
-                const teacherAssignment = await this.assignService.asignClassess(classId, teacherId);
+            for (let i = 0; i < classIds.length; i++) {
+                const classId = classIds[i];
+                const sectionName = sectionNames[i];
+                const teacherAssignment = await this.assignService.asignClassess(classId, teacherId, sectionName);
                 teacherAssignments.push(teacherAssignment);
             }
             return { teacherAssignments };
@@ -57,10 +59,11 @@ __decorate([
 ], AssignToController.prototype, "assignClass", null);
 __decorate([
     (0, common_1.Post)('/assign'),
-    __param(0, (0, common_1.Body)('classIds')),
-    __param(1, (0, common_1.Body)('teacherId')),
+    __param(0, (0, common_1.Body)("classIds")),
+    __param(1, (0, common_1.Body)("teacherId")),
+    __param(2, (0, common_1.Body)("sectionName")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Array, String]),
+    __metadata("design:paramtypes", [Array, String, Array]),
     __metadata("design:returntype", Promise)
 ], AssignToController.prototype, "assignClasses", null);
 __decorate([

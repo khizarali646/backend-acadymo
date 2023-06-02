@@ -33,16 +33,16 @@ let AssignToService = class AssignToService {
             throw new common_1.HttpException('Teacher is already assigned to a class', common_1.HttpStatus.CONFLICT);
         }
     }
-    async asignClassess(classId, teacherId) {
+    async asignClassess(classId, teacherId, sectionName) {
         try {
-            const teacherAssignClass = await this.AssignModel.findOneAndUpdate({ classId: classId }, { teacherId: teacherId }, { new: true, upsert: true })
-                .populate('classId')
-                .populate('teacherId');
+            const teacherAssignClass = await this.AssignModel.findOneAndUpdate({ classId: classId, sectionName: sectionName }, { teacherId: teacherId }, { new: true, upsert: true })
+                .populate("classId")
+                .populate("teacherId");
             return teacherAssignClass;
         }
         catch (e) {
             console.log(e);
-            throw new common_1.HttpException('Teacher is already assigned to a class', common_1.HttpStatus.CONFLICT);
+            throw new common_1.HttpException("Teacher is already assigned to a class", common_1.HttpStatus.CONFLICT);
         }
     }
     async getAssignedClassesForTeacher(teacherId) {
