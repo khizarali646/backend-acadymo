@@ -29,8 +29,7 @@ export class AssignToController {
   @Post("/assign")
   async assignClasses(
     @Body("classIds") classIds: string[],
-    @Body("teacherId") teacherId: string,
-    @Body("sectionName") sectionNames: string[]
+    @Body("teacherId") teacherId: string
   ) {
     try {
       const teacherAssignments = [];
@@ -43,14 +42,10 @@ export class AssignToController {
         );
       }
 
-      // for (const classId of classIds) {
-      for (let i = 0; i < classIds.length; i++) {
-        const classId = classIds[i];
-        const sectionName = sectionNames[i];
-        const teacherAssignment = await this.assignService.asignClasses(
+      for (const classId of classIds) {
+        const teacherAssignment = await this.assignService.asignClassess(
           classId,
-          teacherId,
-          sectionName
+          teacherId
         );
 
         teacherAssignments.push(teacherAssignment);

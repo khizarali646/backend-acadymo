@@ -36,14 +36,13 @@ export class AssignToService {
     }
   }
 
-  async asignClasses(
+  async asignClassess(
     classId: string,
-    teacherId: string,
-    sectionName: string
+    teacherId: string
   ): Promise<AssignDocument> {
     try {
       const teacherAssignClass = await this.AssignModel.findOneAndUpdate(
-        { classId: classId, sectionName: sectionName },
+        { classId: classId },
         { teacherId: teacherId },
         { new: true, upsert: true }
       )

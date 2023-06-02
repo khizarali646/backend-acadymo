@@ -6,7 +6,7 @@ export declare class AssignToController {
     assignClass(classId: string, teacherId: string): Promise<{
         teacherAssignClass: AssignDocument;
     }>;
-    assignClasses(classIds: string[], teacherId: string): Promise<{
+    assignClasses(classIds: string[], teacherId: string, sectionNames: string[]): Promise<{
         teacherAssignments: any[];
     }>;
     getAssignedClassesForTeacher(teacherId: string): Promise<AssignDocument[]>;
