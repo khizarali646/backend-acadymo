@@ -24,18 +24,18 @@ let AssignToService = class AssignToService {
     async assignClass(classId, teacherId) {
         try {
             const teacherAssignClass = await this.AssignModel.findOneAndUpdate({ classId: classId }, { teacherId: teacherId }, { new: true, upsert: true })
-                .populate('classId')
-                .populate('teacherId');
+                .populate("classId")
+                .populate("teacherId");
             return teacherAssignClass;
         }
         catch (e) {
             console.log(e);
-            throw new common_1.HttpException('Teacher is already assigned to a class', common_1.HttpStatus.CONFLICT);
+            throw new common_1.HttpException("Teacher is already assigned to a class", common_1.HttpStatus.CONFLICT);
         }
     }
-    async asignClassess(classId, teacherId, sectionName) {
+    async asignClassess(classId, teacherId) {
         try {
-            const teacherAssignClass = await this.AssignModel.findOneAndUpdate({ classId: classId, sectionName: sectionName }, { teacherId: teacherId }, { new: true, upsert: true })
+            const teacherAssignClass = await this.AssignModel.findOneAndUpdate({ classId: classId }, { teacherId: teacherId }, { new: true, upsert: true })
                 .populate("classId")
                 .populate("teacherId");
             return teacherAssignClass;
@@ -46,7 +46,14 @@ let AssignToService = class AssignToService {
         }
     }
     async getAssignedClassesForTeacher(teacherId) {
-        return this.AssignModel.find({ teacherId: teacherId }).populate('classId');
+        return this.AssignModel.find({ teacherId: teacherId }).populate({
+            path: "classId",
+            populate: {
+                path: "sectionId",
+                select: "sectionName",
+                model: "Section",
+            },
+        });
     }
     async delete(teacherId) {
         return this.AssignModel.findByIdAndRemove(teacherId).exec();

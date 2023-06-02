@@ -23,17 +23,15 @@ let AssignToController = class AssignToController {
         const teacherAssignClass = await this.assignService.assignClass(classId, teacherId);
         return { teacherAssignClass };
     }
-    async assignClasses(classIds, teacherId, sectionNames) {
+    async assignClasses(classIds, teacherId) {
         try {
             const teacherAssignments = [];
             if (!Array.isArray(classIds)) {
                 console.log(classIds);
                 throw new common_1.HttpException("classIds must be an array", common_1.HttpStatus.BAD_REQUEST);
             }
-            for (let i = 0; i < classIds.length; i++) {
-                const classId = classIds[i];
-                const sectionName = sectionNames[i];
-                const teacherAssignment = await this.assignService.asignClassess(classId, teacherId, sectionName);
+            for (const classId of classIds) {
+                const teacherAssignment = await this.assignService.asignClassess(classId, teacherId);
                 teacherAssignments.push(teacherAssignment);
             }
             return { teacherAssignments };
@@ -50,38 +48,37 @@ let AssignToController = class AssignToController {
     }
 };
 __decorate([
-    (0, common_1.Post)('/update'),
-    __param(0, (0, common_1.Body)('classId')),
-    __param(1, (0, common_1.Body)('teacherId')),
+    (0, common_1.Post)("/update"),
+    __param(0, (0, common_1.Body)("classId")),
+    __param(1, (0, common_1.Body)("teacherId")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], AssignToController.prototype, "assignClass", null);
 __decorate([
-    (0, common_1.Post)('/assign'),
+    (0, common_1.Post)("/assign"),
     __param(0, (0, common_1.Body)("classIds")),
     __param(1, (0, common_1.Body)("teacherId")),
-    __param(2, (0, common_1.Body)("sectionName")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Array, String, Array]),
+    __metadata("design:paramtypes", [Array, String]),
     __metadata("design:returntype", Promise)
 ], AssignToController.prototype, "assignClasses", null);
 __decorate([
-    (0, common_1.Get)('teacher/:teacherId'),
-    __param(0, (0, common_1.Param)('teacherId')),
+    (0, common_1.Get)("teacher/:teacherId"),
+    __param(0, (0, common_1.Param)("teacherId")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], AssignToController.prototype, "getAssignedClassesForTeacher", null);
 __decorate([
-    (0, common_1.Delete)('/teacher/:teacherId'),
-    __param(0, (0, common_1.Param)('teacherId')),
+    (0, common_1.Delete)("/teacher/:teacherId"),
+    __param(0, (0, common_1.Param)("teacherId")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], AssignToController.prototype, "delete", null);
 AssignToController = __decorate([
-    (0, common_1.Controller)('assign-teacher-to-class'),
+    (0, common_1.Controller)("assign-teacher-to-class"),
     __metadata("design:paramtypes", [assign_to_service_1.AssignToService])
 ], AssignToController);
 exports.AssignToController = AssignToController;

@@ -61,7 +61,14 @@ export class AssignToService {
   async getAssignedClassesForTeacher(
     teacherId: string
   ): Promise<AssignDocument[]> {
-    return this.AssignModel.find({ teacherId: teacherId }).populate("classId");
+    return this.AssignModel.find({ teacherId: teacherId }).populate({
+      path: "classId",
+      populate: {
+        path: "sectionId",
+        select: "sectionName",
+        model: "Section",
+      },
+    });
   }
 
   async delete(teacherId: string): Promise<AssignDocument> {
