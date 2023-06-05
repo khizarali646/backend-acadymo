@@ -1,7 +1,7 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
-import mongoose from 'mongoose';
-import { Organization } from './organization.schema';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Document, Types } from "mongoose";
+import mongoose from "mongoose";
+import { Organization } from "./organization.schema";
 
 export type ProfileDocument = Profile & Document;
 @Schema()
@@ -10,7 +10,7 @@ export class Profile {
   firstName: string;
   @Prop({ required: true })
   lastName: string;
-  @Prop({ required: true })
+  @Prop()
   age: number;
   @Prop()
   phoneNumber: string;
@@ -30,14 +30,14 @@ export class User {
 
   @Prop({
     enum: [
-      'super-admin',
-      'admin',
-      'organization-owner',
-      'organization-admin',
-      'student',
-      'teacher',
-      'parent',
-      'accounts',
+      "super-admin",
+      "admin",
+      "organization-owner",
+      "organization-admin",
+      "student",
+      "teacher",
+      "parent",
+      "accounts",
     ],
     required: true,
   })
@@ -46,7 +46,7 @@ export class User {
   @Prop({ type: ProfileSchema })
   profile?: Profile;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Organization' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: "Organization" })
   organizationId: Types.ObjectId;
 }
 
