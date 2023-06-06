@@ -6,31 +6,31 @@ import {
   HttpStatus,
   Param,
   Post,
-} from '@nestjs/common';
-import { TeacherAssignTaskToStudentService } from './teacher-assign-task-to-student.service';
-import { AssignTask } from '../schemas/teacherAssignTaskToStudent.schema';
+} from "@nestjs/common";
+import { TeacherAssignTaskToStudentService } from "./teacher-assign-task-to-student.service";
+import { AssignTask } from "../schemas/teacherAssignTaskToStudent.schema";
 
-@Controller('teacher-assign-task-to-student')
+@Controller("teacher-assign-task-to-student")
 export class TeacherAssignTaskToStudentController {
   constructor(
-    private readonly teacherAssignTaskService: TeacherAssignTaskToStudentService,
+    private readonly teacherAssignTaskService: TeacherAssignTaskToStudentService
   ) {}
 
-  @Post('/update')
+  @Post("/update")
   async assignClass(
-    @Body('taskId') taskId: string,
-    @Body('studentId') studentId: string,
+    @Body("taskId") taskId: string,
+    @Body("studentId") studentId: string
   ) {
     const teacherAssignTask = await this.teacherAssignTaskService.assignTask(
       taskId,
-      studentId,
+      studentId
     );
     return { teacherAssignTask };
   }
-  @Post('/assignTask')
+  @Post("/assignTask")
   async assignClasses(
-    @Body('taskIds') taskIds: string[],
-    @Body('studentId') studentId: string,
+    @Body("taskId") taskIds: string[],
+    @Body("studentId") studentId: string
   ) {
     try {
       const teacherAssignTasks = [];
@@ -38,8 +38,8 @@ export class TeacherAssignTaskToStudentController {
       if (!Array.isArray(taskIds)) {
         console.log(taskIds);
         throw new HttpException(
-          'classIds must be an array',
-          HttpStatus.BAD_REQUEST,
+          "tasks must be an array",
+          HttpStatus.BAD_REQUEST
         );
       }
 
@@ -47,7 +47,7 @@ export class TeacherAssignTaskToStudentController {
         const teacherAssignment =
           await this.teacherAssignTaskService.teacherAssignMultipleTask(
             taskId,
-            studentId,
+            studentId
           );
 
         teacherAssignTasks.push(teacherAssignment);
@@ -59,26 +59,26 @@ export class TeacherAssignTaskToStudentController {
     }
   }
 
-  @Get('list')
+  @Get("list")
   async findAll() {
     const teacherAssignTasks = await this.teacherAssignTaskService.findAll();
     return { teacherAssignTasks };
   }
 
-  @Get(':id')
-  async getTaskById(@Param('id') id: string) {
+  @Get(":id")
+  async getTaskById(@Param("id") id: string) {
     const teacherAssignTask = await this.teacherAssignTaskService.findTaskById(
-      id,
+      id
     );
     return { teacherAssignTask };
   }
 
-  @Get('student/:studentId/tasks')
+  @Get("student/:studentId/tasks")
   async getTasksByStudentId(
-    @Param('studentId') studentId: string,
+    @Param("studentId") studentId: string
   ): Promise<AssignTask[]> {
     const tasks = await this.teacherAssignTaskService.getTasksByStudentId(
-      studentId,
+      studentId
     );
     return tasks;
   }
