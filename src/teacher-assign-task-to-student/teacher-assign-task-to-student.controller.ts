@@ -34,7 +34,6 @@ export class TeacherAssignTaskToStudentController {
   ) {
     try {
       const teacherAssignTasks = [];
-
       if (!Array.isArray(taskIds)) {
         console.log(taskIds);
         throw new HttpException(
