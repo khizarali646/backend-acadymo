@@ -38,4 +38,9 @@ export class AssignClassToStudentService {
   ): Promise<AssignClassDocument[]> {
     return this.AssignModel.find({ studentId: studentId }).populate("classId");
   }
+  async getAssignedStudentsForClass(
+    classId: string
+  ): Promise<AssignClassDocument[]> {
+    return this.AssignModel.find({ classId: classId }).populate("studentId");
+  }
 }

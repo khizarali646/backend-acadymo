@@ -22,4 +22,10 @@ export class AssignClassToStudentController {
   ): Promise<AssignClassDocument[]> {
     return this.assignService.getAssignedClassesForStudent(studentId);
   }
+  @Get("class/:classId")
+  async getAssignedStudentsForClass(
+    @Param("classId") classId: string
+  ): Promise<AssignClassDocument[]> {
+    return this.assignService.getAssignedStudentsForClass(classId);
+  }
 }
