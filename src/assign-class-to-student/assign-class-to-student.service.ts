@@ -12,6 +12,7 @@ export class AssignClassToStudentService {
     @InjectModel(AssignClass.name)
     readonly AssignModel: Model<AssignClassDocument>
   ) {}
+
   async assignClass(
     classId: string,
     studentId: string
@@ -19,8 +20,16 @@ export class AssignClassToStudentService {
     try {
       const AssignClassToStudent = await this.AssignModel.findOneAndUpdate(
         { classId: classId },
-        { studentId: studentId },
-        { new: true, upsert: true }
+        {
+          $addToSet: {
+            studentId: studentId,
+          },
+        },
+        {
+          new: true,
+          upsert: true,
+          setDefaultsOnInsert: true,
+        }
       )
         .populate("classId")
         .populate("studentId");
@@ -33,11 +42,13 @@ export class AssignClassToStudentService {
       );
     }
   }
+
   async getAssignedClassesForStudent(
     studentId: string
   ): Promise<AssignClassDocument[]> {
     return this.AssignModel.find({ studentId: studentId }).populate("classId");
   }
+
   async getAssignedStudentsForClass(
     classId: string
   ): Promise<AssignClassDocument[]> {
