@@ -20,6 +20,7 @@ import { SearchModule } from "./search/search.module";
 import { StudentSearchModule } from "./student-search/student-search.module";
 import { AssignToModule } from "./assign-teacher-to-class/assign-to.module";
 import { AssignClassToStudentModule } from "./assign-class-to-student/assign-class-to-student.module";
+import { AssignSubjectToTeacherModule } from "./assign-subject-to-teacher/assign-subject-to-teacher.module";
 
 @Module({
   imports: [
@@ -51,6 +52,7 @@ import { AssignClassToStudentModule } from "./assign-class-to-student/assign-cla
     StudentSearchModule,
     AssignToModule,
     AssignClassToStudentModule,
+    AssignSubjectToTeacherModule,
   ],
   controllers: [AppController],
   providers: [],
