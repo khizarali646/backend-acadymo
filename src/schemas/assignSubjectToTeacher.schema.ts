@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose, { Types, Document } from "mongoose";
-import { Subject } from "./subject.schema";
 
 export type AssignSubjectDocument = AssignSubject & Document;
 @Schema()
