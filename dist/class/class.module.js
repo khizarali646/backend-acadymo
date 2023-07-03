@@ -13,6 +13,8 @@ const class_controller_1 = require("./class.controller");
 const mongoose_1 = require("@nestjs/mongoose");
 const class_schema_1 = require("../schemas/class.schema");
 const config_1 = require("@nestjs/config");
+const assignTeacherToClass_schema_1 = require("../schemas/assignTeacherToClass.schema");
+const assignStudentToClass_schema_1 = require("../schemas/assignStudentToClass.schema");
 let ClassModule = class ClassModule {
 };
 ClassModule = __decorate([
@@ -21,7 +23,11 @@ ClassModule = __decorate([
         controllers: [class_controller_1.ClassController],
         imports: [
             config_1.ConfigModule.forRoot(),
-            mongoose_1.MongooseModule.forFeature([{ name: class_schema_1.Class.name, schema: class_schema_1.ClassSchema }]),
+            mongoose_1.MongooseModule.forFeature([
+                { name: class_schema_1.Class.name, schema: class_schema_1.ClassSchema },
+                { name: assignTeacherToClass_schema_1.AssignClass.name, schema: assignTeacherToClass_schema_1.AssignClassSchema },
+                { name: assignStudentToClass_schema_1.AssignStudentToClass.name, schema: assignStudentToClass_schema_1.AssignStudentSchema },
+            ]),
         ],
     })
 ], ClassModule);

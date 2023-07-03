@@ -40,9 +40,51 @@ let ClassController = class ClassController {
     async remove(id) {
         return this.classService.remove(id);
     }
+    async assignClass(classId, teacherId) {
+        const teacherAssignClass = await this.classService.assignClass(classId, teacherId);
+        return { teacherAssignClass };
+    }
+    async assignClasses(classIds, teacherId) {
+        try {
+            const AssignedClasses = [];
+            if (!Array.isArray(classIds)) {
+                throw new common_1.HttpException("classIds must be an array", common_1.HttpStatus.BAD_REQUEST);
+            }
+            for (const classId of classIds) {
+                const teacherClass = await this.classService.assignClasses(classId, teacherId);
+                AssignedClasses.push(teacherClass);
+            }
+            return { AssignedClasses };
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+    async getAssignedClassesForTeacher(teacherId) {
+        return this.classService.getAssignedClassesForTeacher(teacherId);
+    }
+    async delete(teacherId) {
+        return this.classService.delete(teacherId);
+    }
+    async assignStudentsToClass(classIds, studentId) {
+        try {
+            const StudentClasses = [];
+            if (!Array.isArray(classIds)) {
+                throw new common_1.HttpException("classIds must be an array", common_1.HttpStatus.BAD_REQUEST);
+            }
+            for (const classId of classIds) {
+                const studentClass = await this.classService.assignStudentsToClass(classId, studentId);
+                StudentClasses.push(studentClass);
+            }
+            return { StudentClasses };
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
 };
 __decorate([
-    (0, common_1.Post)('/create'),
+    (0, common_1.Post)("/create"),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [class_dto_1.ClassDto]),
@@ -55,29 +97,67 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ClassController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Get)(":id"),
+    __param(0, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], ClassController.prototype, "findOne", null);
 __decorate([
-    (0, common_1.Put)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Put)(":id"),
+    __param(0, (0, common_1.Param)("id")),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, class_dto_1.ClassDto]),
     __metadata("design:returntype", Promise)
 ], ClassController.prototype, "update", null);
 __decorate([
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Delete)(":id"),
+    __param(0, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], ClassController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Post)("/teacher/update"),
+    __param(0, (0, common_1.Body)("classId")),
+    __param(1, (0, common_1.Body)("teacherId")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], ClassController.prototype, "assignClass", null);
+__decorate([
+    (0, common_1.Post)("/assign/teacher"),
+    __param(0, (0, common_1.Body)("classIds")),
+    __param(1, (0, common_1.Body)("teacherId")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Array, String]),
+    __metadata("design:returntype", Promise)
+], ClassController.prototype, "assignClasses", null);
+__decorate([
+    (0, common_1.Get)("teacher/:teacherId"),
+    __param(0, (0, common_1.Param)("teacherId")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ClassController.prototype, "getAssignedClassesForTeacher", null);
+__decorate([
+    (0, common_1.Delete)("/teacher/:teacherId"),
+    __param(0, (0, common_1.Param)("teacherId")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ClassController.prototype, "delete", null);
+__decorate([
+    (0, common_1.Post)("assign/student"),
+    __param(0, (0, common_1.Body)("classIds")),
+    __param(1, (0, common_1.Body)("studentId")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Array, String]),
+    __metadata("design:returntype", Promise)
+], ClassController.prototype, "assignStudentsToClass", null);
 ClassController = __decorate([
-    (0, common_1.Controller)('class'),
+    (0, common_1.Controller)("class"),
     __metadata("design:paramtypes", [class_service_1.ClassService])
 ], ClassController);
 exports.ClassController = ClassController;
