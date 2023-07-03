@@ -13,6 +13,7 @@ import { ClassDto } from "./class.dto";
 import { ClassService } from "./class.service";
 import { ClassDocument } from "../schemas/class.schema";
 import { AssignDocument } from "../schemas/assignTeacherToClass.schema";
+import { AssignStudentDocument } from "../schemas/assignStudentToClass.schema";
 
 @Controller("class")
 export class ClassController {
@@ -121,5 +122,11 @@ export class ClassController {
     } catch (e) {
       console.log(e);
     }
+  }
+  @Get("student/:studentId")
+  async getAssignedStudentsForClass(
+    @Param("studentId") studentId: string
+  ): Promise<AssignStudentDocument[]> {
+    return this.classService.getAssignedStudentsForClass(studentId);
   }
 }
