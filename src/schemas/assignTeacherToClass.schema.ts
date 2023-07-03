@@ -2,17 +2,17 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose, { Types, Document } from "mongoose";
 import { Class } from "./class.schema";
 
-export type AssignDocument = Assign & Document;
+export type AssignDocument = AssignClass & Document;
 @Schema()
-export class Assign {
+export class AssignClass {
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Class" }] })
   classId: Types.ObjectId;
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }] })
   teacherId: Types.ObjectId;
 }
-export const AssignSchema = SchemaFactory.createForClass(Assign);
+export const AssignClassSchema = SchemaFactory.createForClass(AssignClass);
 
-export const AssignModel = mongoose.model<AssignDocument>(
-  "Assign",
-  AssignSchema
-);
+// export const AssignModel = mongoose.model<AssignDocument>(
+//   "AssignClass",
+//   AssignClassSchema
+// );

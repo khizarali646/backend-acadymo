@@ -6,7 +6,7 @@ import { MongooseModule } from "@nestjs/mongoose";
 import {
   AssignSubject,
   AssignSubjectSchema,
-} from "../schemas/assignSubjectToTeacher.schema.s";
+} from "../schemas/assignSubjectToTeacher.schema";
 
 @Module({
   controllers: [AssignSubjectToTeacherController],

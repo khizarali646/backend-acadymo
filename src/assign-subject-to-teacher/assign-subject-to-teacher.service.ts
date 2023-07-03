@@ -4,7 +4,7 @@ import { Model } from "mongoose";
 import {
   AssignSubject,
   AssignSubjectDocument,
-} from "../schemas/assignSubjectToTeacher.schema.s";
+} from "../schemas/assignSubjectToTeacher.schema";
 
 @Injectable()
 export class AssignSubjectToTeacherService {

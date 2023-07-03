@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { AssignSubjectToTeacherService } from "./assign-subject-to-teacher.service";
-import { AssignSubjectDocument } from "../schemas/assignSubjectToTeacher.schema.s";
+import { AssignSubjectDocument } from "../schemas/assignSubjectToTeacher.schema";
 
 @Controller("assign-subject-to-teacher")
 export class AssignSubjectToTeacherController {
