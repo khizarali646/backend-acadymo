@@ -18,8 +18,6 @@ import { TaskModule } from "./task/task.module";
 import { TeacherAssignTaskToStudentModule } from "./teacher-assign-task-to-student/teacher-assign-task-to-student.module";
 import { SearchModule } from "./search/search.module";
 import { StudentSearchModule } from "./student-search/student-search.module";
-import { AssignToModule } from "./assign-teacher-to-class/assign-to.module";
-import { AssignClassToStudentModule } from "./assign-class-to-student/assign-class-to-student.module";
 import { AssignSubjectToTeacherModule } from "./assign-subject-to-teacher/assign-subject-to-teacher.module";
 
 @Module({
@@ -50,8 +48,6 @@ import { AssignSubjectToTeacherModule } from "./assign-subject-to-teacher/assign
     SearchModule,
     TeacherAssignTaskToStudentModule,
     StudentSearchModule,
-    AssignToModule,
-    AssignClassToStudentModule,
     AssignSubjectToTeacherModule,
   ],
   controllers: [AppController],
