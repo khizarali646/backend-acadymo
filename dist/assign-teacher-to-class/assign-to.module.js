@@ -23,7 +23,7 @@ AssignToModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot(),
             mongoose_1.MongooseModule.forFeature([
-                { name: assignTeacherToClass_schema_1.Assign.name, schema: assignTeacherToClass_schema_1.AssignSchema },
+                { name: assignTeacherToClass_schema_1.AssignClass.name, schema: assignTeacherToClass_schema_1.AssignClassSchema },
                 { name: class_schema_1.Class.name, schema: class_schema_1.ClassSchema },
             ]),
         ],

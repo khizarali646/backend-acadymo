@@ -33,7 +33,7 @@ let AssignToService = class AssignToService {
             throw new common_1.HttpException("Teacher is already assigned to a class", common_1.HttpStatus.CONFLICT);
         }
     }
-    async asignClassess(classId, teacherId) {
+    async assignClasses(classId, teacherId) {
         try {
             const teacherAssignClass = await this.AssignModel.findOneAndUpdate({ classId: classId }, { teacherId: teacherId }, { new: true, upsert: true })
                 .populate("classId")
@@ -61,7 +61,7 @@ let AssignToService = class AssignToService {
 };
 AssignToService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)(assignTeacherToClass_schema_1.Assign.name)),
+    __param(0, (0, mongoose_1.InjectModel)(assignTeacherToClass_schema_1.AssignClass.name)),
     __metadata("design:paramtypes", [mongoose_2.Model])
 ], AssignToService);
 exports.AssignToService = AssignToService;

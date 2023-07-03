@@ -31,7 +31,7 @@ let AssignToController = class AssignToController {
                 throw new common_1.HttpException("classIds must be an array", common_1.HttpStatus.BAD_REQUEST);
             }
             for (const classId of classIds) {
-                const teacherAssignment = await this.assignService.asignClassess(classId, teacherId);
+                const teacherAssignment = await this.assignService.assignClasses(classId, teacherId);
                 teacherAssignments.push(teacherAssignment);
             }
             return { teacherAssignments };
