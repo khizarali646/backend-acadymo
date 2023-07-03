@@ -123,10 +123,10 @@ export class ClassController {
       console.log(e);
     }
   }
-  @Get("student/:studentId")
+  @Get("student/:classId")
   async getAssignedStudentsForClass(
-    @Param("studentId") studentId: string
+    @Param("classId") classId: string
   ): Promise<AssignStudentDocument[]> {
-    return this.classService.getAssignedStudentsForClass(studentId);
+    return this.classService.getAssignedStudentsForClass(classId);
   }
 }
