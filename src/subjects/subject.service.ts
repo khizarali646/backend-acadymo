@@ -3,11 +3,17 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Subject, SubjectDocument } from "../schemas/subject.schema";
 import { SubjectDto } from "../dto/subject.dto";
+import {
+  AssignSubject,
+  AssignSubjectDocument,
+} from "../schemas/assignSubjectToTeacher.schema";
 
 @Injectable()
 export class SubjectService {
   constructor(
-    @InjectModel(Subject.name) private SubjectModel: Model<SubjectDocument>
+    @InjectModel(Subject.name) private SubjectModel: Model<SubjectDocument>,
+    @InjectModel(AssignSubject.name)
+    readonly AssignSubjectModel: Model<AssignSubjectDocument>
   ) {}
 
   async create(createSubjectDto: SubjectDto): Promise<SubjectDocument> {
@@ -37,5 +43,27 @@ export class SubjectService {
   }
   async remove(id: string): Promise<SubjectDocument> {
     return this.SubjectModel.findByIdAndRemove(id);
+  }
+  async assignSubject(
+    subjectId: string,
+    teacherId: string
+  ): Promise<AssignSubjectDocument> {
+    try {
+      const teacherAssignSubject =
+        await this.AssignSubjectModel.findOneAndUpdate(
+          { subjectId: subjectId },
+          { teacherId: teacherId },
+          { new: true, upsert: true }
+        )
+          .populate("subjectId")
+          .populate("teacherId");
+      return teacherAssignSubject;
+    } catch (e) {
+      console.log(e);
+      throw new HttpException(
+        "Subject is already assigned to a teacher",
+        HttpStatus.CONFLICT
+      );
+    }
   }
 }

@@ -1,14 +1,14 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Teacher, TeacherDocument } from '../schemas/teacher.schema';
-import { TeacherDto } from './teacher.dto';
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { Teacher, TeacherDocument } from "../schemas/teacher.schema";
+import { TeacherDto } from "./teacher.dto";
 
 @Injectable()
 export class TeacherService {
   constructor(
     @InjectModel(Teacher.name)
-    private readonly teacherModel: Model<TeacherDocument>,
+    private readonly teacherModel: Model<TeacherDocument>
   ) {}
 
   async create(createTeacherDto: TeacherDto): Promise<TeacherDocument> {
@@ -16,7 +16,7 @@ export class TeacherService {
       const createdTeacher = new this.teacherModel(createTeacherDto);
       return await createdTeacher.save();
     } catch (e) {
-      throw new HttpException('Teacher already register', HttpStatus.CONFLICT);
+      throw new HttpException("Teacher already register", HttpStatus.CONFLICT);
     }
   }
 
@@ -32,7 +32,7 @@ export class TeacherService {
   // }
   async update(
     id: string,
-    updateTeacherDto: TeacherDto,
+    updateTeacherDto: TeacherDto
   ): Promise<TeacherDocument> {
     return this.teacherModel
       .findByIdAndUpdate(id, updateTeacherDto, { new: true })

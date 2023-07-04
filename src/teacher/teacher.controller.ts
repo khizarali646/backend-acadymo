@@ -6,16 +6,16 @@ import {
   Param,
   Post,
   Put,
-} from '@nestjs/common';
-import { TeacherService } from './teacher.service';
-import { TeacherDto } from './teacher.dto';
-import { TeacherDocument } from '../schemas/teacher.schema';
+} from "@nestjs/common";
+import { TeacherService } from "./teacher.service";
+import { TeacherDto } from "./teacher.dto";
+import { TeacherDocument } from "../schemas/teacher.schema";
 
-@Controller('teacher')
+@Controller("teacher")
 export class TeacherController {
   constructor(private readonly teacherService: TeacherService) {}
 
-  @Post('/create')
+  @Post("/create")
   async create(@Body() createTeacherDto: TeacherDto) {
     return await this.teacherService.create(createTeacherDto);
   }
@@ -24,20 +24,25 @@ export class TeacherController {
   async findAll() {
     return this.teacherService.findAll();
   }
-  @Get(':id')
-  findOne(@Param('id') id: string): Promise<TeacherDocument> {
+  @Get(":id")
+  findOne(@Param("id") id: string): Promise<TeacherDocument> {
     return this.teacherService.findOne(id);
   }
-  @Put(':id')
+  @Put(":id")
   update(
-    @Param('id') id: string,
-    @Body() createUpdateDto: TeacherDto,
+    @Param("id") id: string,
+    @Body() createUpdateDto: TeacherDto
   ): Promise<TeacherDocument> {
     return this.teacherService.update(id, createUpdateDto);
   }
 
-  @Delete(':id')
-  delete(@Param('id') id: string): Promise<TeacherDocument> {
+  @Delete(":id")
+  delete(@Param("id") id: string): Promise<TeacherDocument> {
     return this.teacherService.delete(id);
+  }
+
+  @Get(":id/class")
+  getClasses(@Param("id") id: string): Promise<any> {
+    return this.teacherService.findOne(id);
   }
 }
