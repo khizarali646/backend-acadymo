@@ -15,7 +15,7 @@ export class AssignStudentToClass {
 
 export const AssignStudentSchema =
   SchemaFactory.createForClass(AssignStudentToClass);
-// export const AssignStudentModel = mongoose.model<AssignStudentDocument>(
-//   "AssignStudentToClass",
-//   AssignStudentSchema
-// );
+export const AssignStudentModel = mongoose.model<AssignStudentDocument>(
+  "AssignStudentToClass",
+  AssignStudentSchema
+);

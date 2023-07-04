@@ -82,6 +82,12 @@ let ClassController = class ClassController {
             console.log(e);
         }
     }
+    async getAssignedClassesForStudent(studentId) {
+        return this.classService.getAssignedClassesForStudent(studentId);
+    }
+    async getAssignedStudentsForClass(classId) {
+        return this.classService.getAssignedStudentsForClass(classId);
+    }
 };
 __decorate([
     (0, common_1.Post)("/create"),
@@ -156,6 +162,20 @@ __decorate([
     __metadata("design:paramtypes", [Array, String]),
     __metadata("design:returntype", Promise)
 ], ClassController.prototype, "assignStudentsToClass", null);
+__decorate([
+    (0, common_1.Get)("student/:studentId"),
+    __param(0, (0, common_1.Param)("studentId")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ClassController.prototype, "getAssignedClassesForStudent", null);
+__decorate([
+    (0, common_1.Get)("class/:classId"),
+    __param(0, (0, common_1.Param)("classId")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ClassController.prototype, "getAssignedStudentsForClass", null);
 ClassController = __decorate([
     (0, common_1.Controller)("class"),
     __metadata("design:paramtypes", [class_service_1.ClassService])

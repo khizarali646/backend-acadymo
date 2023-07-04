@@ -2,6 +2,7 @@ import { ClassDto } from "./class.dto";
 import { ClassService } from "./class.service";
 import { ClassDocument } from "../schemas/class.schema";
 import { AssignDocument } from "../schemas/assignTeacherToClass.schema";
+import { AssignStudentDocument } from "../schemas/assignStudentToClass.schema";
 export declare class ClassController {
     private readonly classService;
     constructor(classService: ClassService);
@@ -21,4 +22,6 @@ export declare class ClassController {
     assignStudentsToClass(classIds: string[], studentId: string): Promise<{
         StudentClasses: any[];
     }>;
+    getAssignedClassesForStudent(studentId: string): Promise<AssignStudentDocument[]>;
+    getAssignedStudentsForClass(classId: string): Promise<AssignStudentDocument[]>;
 }

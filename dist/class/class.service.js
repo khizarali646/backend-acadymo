@@ -120,6 +120,12 @@ let ClassService = class ClassService {
             throw new common_1.HttpException("Student is already assigned to a class", common_1.HttpStatus.CONFLICT);
         }
     }
+    async getAssignedClassesForStudent(studentId) {
+        return this.AssignStudentModel.find({ studentId: studentId }).populate("classId");
+    }
+    async getAssignedStudentsForClass(classId) {
+        return this.AssignStudentModel.find({ classId: classId }).populate("studentId");
+    }
 };
 ClassService = __decorate([
     (0, common_1.Injectable)(),

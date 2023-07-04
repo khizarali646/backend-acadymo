@@ -152,16 +152,19 @@ export class ClassService {
       );
     }
   }
-  async getAssignedStudentsForClass(
+  async getAssignedClassesForStudent(
     studentId: string
   ): Promise<AssignStudentDocument[]> {
-    return this.AssignStudentModel.find({ studentId: studentId }).populate({
-      path: "classId",
-      populate: {
-        path: "sectionId",
-        select: "sectionName",
-        model: "Section",
-      },
-    });
+    return this.AssignStudentModel.find({ studentId: studentId }).populate(
+      "classId"
+    );
+  }
+
+  async getAssignedStudentsForClass(
+    classId: string
+  ): Promise<AssignStudentDocument[]> {
+    return this.AssignStudentModel.find({ classId: classId }).populate(
+      "studentId"
+    );
   }
 }

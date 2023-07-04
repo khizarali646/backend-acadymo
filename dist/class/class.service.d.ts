@@ -18,4 +18,6 @@ export declare class ClassService {
     getAssignedClassesForTeacher(teacherId: string): Promise<AssignDocument[]>;
     delete(teacherId: string): Promise<AssignDocument>;
     assignStudentsToClass(classId: string, studentId: string): Promise<AssignStudentDocument>;
+    getAssignedClassesForStudent(studentId: string): Promise<AssignStudentDocument[]>;
+    getAssignedStudentsForClass(classId: string): Promise<AssignStudentDocument[]>;
 }

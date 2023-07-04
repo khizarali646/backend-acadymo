@@ -12,7 +12,7 @@ export class AssignClass {
 }
 export const AssignClassSchema = SchemaFactory.createForClass(AssignClass);
 
-// export const AssignModel = mongoose.model<AssignDocument>(
-//   "AssignClass",
-//   AssignClassSchema
-// );
+export const AssignModel = mongoose.model<AssignDocument>(
+  "AssignClass",
+  AssignClassSchema
+);
