@@ -71,7 +71,7 @@ export class SubjectService {
     teacherId: string
   ): Promise<AssignSubjectDocument[]> {
     return this.AssignSubjectModel.find({ teacherId: teacherId }).populate(
-      "teacherId"
+      "subjectId"
     );
   }
 }
