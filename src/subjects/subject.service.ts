@@ -7,6 +7,7 @@ import {
   AssignSubject,
   AssignSubjectDocument,
 } from "../schemas/assignSubjectToTeacher.schema";
+import { AssignStudentDocument } from "../schemas/assignStudentToClass.schema";
 
 @Injectable()
 export class SubjectService {
@@ -65,5 +66,12 @@ export class SubjectService {
         HttpStatus.CONFLICT
       );
     }
+  }
+  async getSubjectsOfTeacher(
+    teacherId: string
+  ): Promise<AssignSubjectDocument[]> {
+    return this.AssignSubjectModel.find({ teacherId: teacherId }).populate(
+      "teacherId"
+    );
   }
 }

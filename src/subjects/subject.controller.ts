@@ -10,6 +10,7 @@ import {
 import { SubjectService } from "./subject.service";
 import { SubjectDto } from "../dto/subject.dto";
 import { SubjectDocument } from "../schemas/subject.schema";
+import { AssignSubjectDocument } from "../schemas/assignSubjectToTeacher.schema";
 
 @Controller("subject")
 export class SubjectController {
@@ -49,5 +50,11 @@ export class SubjectController {
       teacherId
     );
     return { AssignSubjectToTeacher };
+  }
+  @Get(":teacherId/subjects")
+  async getSubjectsOfTeacher(
+    @Param("teacherId") teacherId: string
+  ): Promise<AssignSubjectDocument[]> {
+    return this.SubjectService.getSubjectsOfTeacher(teacherId);
   }
 }
