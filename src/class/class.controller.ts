@@ -123,16 +123,16 @@ export class ClassController {
       console.log(e);
     }
   }
-  @Get("student/:studentId")
+  @Get(":studentId/class")
   async getAssignedClassesForStudent(
     @Param("studentId") studentId: string
   ): Promise<AssignStudentDocument[]> {
     return this.classService.getAssignedClassesForStudent(studentId);
   }
-  @Get("class/:classId")
-  async getAssignedStudentsForClass(
+  @Get(":classId/students")
+  async getStudentsOfClass(
     @Param("classId") classId: string
   ): Promise<AssignStudentDocument[]> {
-    return this.classService.getAssignedStudentsForClass(classId);
+    return this.classService.getStudentsOfClass(classId);
   }
 }

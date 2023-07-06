@@ -23,5 +23,5 @@ export declare class ClassController {
         StudentClasses: any[];
     }>;
     getAssignedClassesForStudent(studentId: string): Promise<AssignStudentDocument[]>;
-    getAssignedStudentsForClass(classId: string): Promise<AssignStudentDocument[]>;
+    getStudentsOfClass(classId: string): Promise<AssignStudentDocument[]>;
 }

@@ -123,7 +123,7 @@ let ClassService = class ClassService {
     async getAssignedClassesForStudent(studentId) {
         return this.AssignStudentModel.find({ studentId: studentId }).populate("classId");
     }
-    async getAssignedStudentsForClass(classId) {
+    async getStudentsOfClass(classId) {
         return this.AssignStudentModel.find({ classId: classId }).populate("studentId");
     }
 };

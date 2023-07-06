@@ -159,10 +159,7 @@ export class ClassService {
       "classId"
     );
   }
-
-  async getAssignedStudentsForClass(
-    classId: string
-  ): Promise<AssignStudentDocument[]> {
+  async getStudentsOfClass(classId: string): Promise<AssignStudentDocument[]> {
     return this.AssignStudentModel.find({ classId: classId }).populate(
       "studentId"
     );
